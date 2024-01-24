@@ -1,3 +1,11 @@
+# 简介
+
+本项目是个人用于练习的项目，为Vue3 + vite + ts 项目
+
+# 个人运行node版本
+
+node v16.20.2
+
 # vue-project
 
 This template should help get you started developing with Vue 3 in Vite.
