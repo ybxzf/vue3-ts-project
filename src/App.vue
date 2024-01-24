@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
@@ -11,15 +6,20 @@ import HelloWorld from './components/HelloWorld.vue'
       <HelloWorld msg="You did it!" />
 
       <nav>
-        <RouterLink to="/home">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/piniaTest">PiniaTest</RouterLink>
+        <router-link to="/home">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/piniaTest">PiniaTest</router-link>
       </nav>
     </div>
   </header>
 
-  <RouterView style="border: 1px solid red;" />
+  <router-view style="border: 1px solid red;" />
 </template>
+
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
+</script>
 
 <style scoped>
 header {
