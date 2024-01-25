@@ -1,8 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from "./routes";
 
+// const routerHistory = createWebHistory('/vue-project')
 const router = createRouter({
+  //import.meta.env: vite.config中配置的基本信息
   history: createWebHistory(import.meta.env.BASE_URL),
+  // history: routerHistory,
   routes
 })
 
