@@ -14,13 +14,15 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 1111,
     proxy: {
-      "/api": {
+      '/api': 'http://47.108.165.207:20088/ ',
+      "/alm_framework": {
         target: "http://47.108.165.207:20088/api",
+        timeout: 20 * 60 * 1000,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
       },
     },
   },
+  base: '/vue-project',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
