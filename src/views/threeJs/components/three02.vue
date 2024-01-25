@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <main>
     <canvas id="c"></canvas>
   </main>
@@ -55,19 +55,19 @@ function main() {
     //地球场景图节点
     const earthOrbit = new THREE.Object3D(); //空场景图节点，像 Mesh 一样，它也是场景图中的一个节点，但与 Mesh 不同的是，它没有材质（material）和几何体（geometry）。它只是代表一个局部空间
     earthOrbit.position.x = 10; //设置x轴偏移量
-    solarSystem.add(earthOrbit); //地球场景节点 --> 太阳场景节点中
+    solarSystem.add(earthOrbit); //地球场景节点 -> 太阳场景节点中
     objects.push(earthOrbit); //地球场景节点添加到对象数组中
     //月球场景图节点
     const moonOrbit = new THREE.Object3D(); //空场景图节点，像 Mesh 一样，它也是场景图中的一个节点，但与 Mesh 不同的是，它没有材质（material）和几何体（geometry）。它只是代表一个局部空间
     moonOrbit.position.x = 2; //设置x轴偏移量
-    earthOrbit.add(moonOrbit); //月球场景节点 --> 地球场景节点中
+    earthOrbit.add(moonOrbit); //月球场景节点 -> 地球场景节点中
     objects.push(moonOrbit); //地球场景节点添加到对象数组中
 
     //太阳
     const sunMaterial = new THREE.MeshPhongMaterial({ emissive: 0xffff00 }); //材质 {放射属性：黄色}
     const sunMesh = new THREE.Mesh(sphereGeometry, sunMaterial); //网格模型
     sunMesh.scale.set(5, 5, 5); //模型缩放5倍
-    solarSystem.add(sunMesh); //太阳 --> 太阳场景节点中
+    solarSystem.add(sunMesh); //太阳-> 太阳场景节点中
     objects.push(sunMesh); //添加到对象数组中
 
     //地球
@@ -76,7 +76,7 @@ function main() {
       emissive: 0x112244,
     }); //材质 {颜色：蓝色, 放射属性：蓝黑色}
     const earthMesh = new THREE.Mesh(sphereGeometry, earthMaterial); //网格模型
-    earthOrbit.add(earthMesh); ////地球 --> 地球场景节点中
+    earthOrbit.add(earthMesh); ////地球 -> 地球场景节点中
     objects.push(earthMesh); //添加到对象数组中
 
     //月球
@@ -86,7 +86,7 @@ function main() {
     }); //材质 {颜色：灰色, 放射属性：灰黑色}
     const moonMesh = new THREE.Mesh(sphereGeometry, moonMaterial); //网格模型
     moonMesh.scale.set(0.5, 0.5, 0.5); //模型缩放-5倍
-    moonOrbit.add(moonMesh); //月球 --> 月球场景节点中
+    moonOrbit.add(moonMesh); //月球 -> 月球场景节点中
     objects.push(moonMesh); //添加到对象数组中
 
     makeAxisGrid(solarSystem, "solarSystem", 25);
@@ -187,4 +187,11 @@ main {
   height: 100%;
   display: block;
 }
-</style>
+</style> -->
+
+<template>
+  <div>案例2</div>
+</template>
+<script lang="ts" setup>
+</script>
+<style lang="less" scoped></style>

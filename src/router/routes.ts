@@ -43,7 +43,7 @@ export const routes: any = [
         path: '/about',
         name: 'about',
         cName: '关于',
-        component: () => import('@/views/AboutView.vue')
+        component: () => import('@/views/about/index.vue')
       },
     ]
   }

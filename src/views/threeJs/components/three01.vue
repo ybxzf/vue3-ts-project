@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <main>
     <canvas id="three"></canvas>
   </main>
@@ -92,4 +92,11 @@ main {
   height: 100%;
   display: block;
 }
-</style>
+</style> -->
+
+<template>
+  <div>案例1</div>
+</template>
+<script lang="ts" setup>
+</script>
+<style lang="less" scoped></style>

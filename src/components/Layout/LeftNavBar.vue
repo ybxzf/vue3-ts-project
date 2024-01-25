@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { routes } from "@/router/routes.ts";
+import { routes } from "@/router/routes";
 import { DArrowLeft, DArrowRight, Menu } from "@element-plus/icons-vue";
 
 const router: any = useRouter();

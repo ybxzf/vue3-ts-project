@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@element-plus/icons": "^0.0.11",
     "@element-plus/icons-vue": "^2.3.1",
     "element-plus": "^2.5.3",
     "less": "^4.2.0",
