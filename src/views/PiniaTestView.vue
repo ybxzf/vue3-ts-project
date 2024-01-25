@@ -15,11 +15,13 @@
     </div>
     <div>性别：{{ user.sex }}----{{ userStore.user.sex }}</div>
     <div>邮箱：{{ user.email }}----{{ userStore.user.email }}</div>
-    <button @click="updateInfoJ">解构修改</button>
-    <button @click="updateInfo">不解构修改</button>
+    <div>
+      <el-button type="primary" @click="updateInfoJ">解构修改</el-button>
+      <el-button type="primary" @click="updateInfo">不解构修改</el-button>
+    </div>
   </div>
 </template>
-  
+
 <script setup lang="ts">
 import { onMounted, watch } from "vue";
 import { useInformStore } from "@/stores/inform";
@@ -27,7 +29,7 @@ import { useInformStore } from "@/stores/inform";
 const { user, birth, updateUserInfo } = useInformStore();
 const userStore = useInformStore();
 
-onMounted(() => { });
+onMounted(() => {});
 watch(
   () => userStore.birth,
   (_newValue, _oldValue) => {
@@ -58,8 +60,13 @@ function updateInfo() {
 </script>
 <style scoped lang="less">
 .page {
+  height: 100%;
   background-color: aqua;
-  div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
     color: rgb(232, 0, 253);
   }
 }
