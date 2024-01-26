@@ -56,15 +56,15 @@ const isCollapse = ref<boolean>(false);
 const getRoutes = computed(() => routes[1].children);
 
 onMounted(() => {
-//   console.log(getRoutes.value);
-//   console.log(route.path);
+  //   console.log(getRoutes.value);
+  //   console.log(route.path);
   handleSelect(route.name);
 });
 
 function handleSelect(key: string) {
-//   console.log("key", key);
-//   console.log("route", route.path);
-//   console.log("router", router);
+  //   console.log("key", key);
+  //   console.log("route", route.path);
+  //   console.log("router", router);
 
   router.push({
     path: `/${key}`,
@@ -85,12 +85,14 @@ function toggleFold(param: boolean) {
   height: 100%;
   background: var(--devui-base-bg, #ffffff);
   --el-menu-base-level-padding: 15px;
-
+  ::-webkit-scrollbar {
+    display: none;
+  }
   .menu-vertical {
     width: 180px;
     height: 100%;
+    min-height: calc(100% - @footer-height);
     padding: 0 0 @footer-height 0;
-    max-height: calc(100% - @footer-height);
     overflow-y: auto;
 
     &.el-menu--collapse {
@@ -117,10 +119,11 @@ function toggleFold(param: boolean) {
 .footer-content {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - 1px);
   height: @footer-height;
   line-height: @footer-height;
-  //   padding: 0 5px;
+  background-color: #fff;
+  // padding: 0 5px;
 
   .el-icon {
     float: right;
