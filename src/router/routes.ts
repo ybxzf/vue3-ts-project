@@ -28,14 +28,20 @@ export const routes: any = [
           {
             path: '/threeJs/three01',
             name: 'threeJs/three01',
-            cName: '案例1',
+            cName: '基本图像',
             component: () => import('@/views/threeJs/components/three01.vue')
           },
           {
             path: '/threeJs/three02',
             name: 'threeJs/three02',
-            cName: '案例2',
+            cName: '鼠标操作',
             component: () => import('@/views/threeJs/components/three02.vue')
+          },
+          {
+            path: '/threeJs/three03',
+            name: 'threeJs/three03',
+            cName: '鼠标+动画',
+            component: () => import('@/views/threeJs/components/three03.vue')
           },
         ]
       },
