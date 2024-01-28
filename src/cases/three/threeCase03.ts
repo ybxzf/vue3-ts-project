@@ -15,9 +15,7 @@ threeJs最基本的3个属性：场景(scene), 相机(camera), 渲染器(rendere
 注：所有对象可以一次性添加到场景中
 */
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-//由于vite打包时会报找不到OrbitControls，所以自己去three包里把OrbitControls提出来了
-// import { OrbitControls } from "@/assets/OrbitControls";
+import { OrbitControls } from '@three-ts/orbit-controls';
 
 //创建场景
 const scene: any = new THREE.Scene();
@@ -50,7 +48,7 @@ light.position.set(100, 0, 0);
 //将光源添加到场景
 
 //创建辅助坐标轴
-const axesHelper = new THREE.AxesHelper(100, 100, 100);
+const axesHelper = new THREE.AxesHelper(100);
 
 //将坐标轴添加到场景
 scene.add(cube, light, axesHelper);

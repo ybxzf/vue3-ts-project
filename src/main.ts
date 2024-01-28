@@ -18,6 +18,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 //引入router
 import router from './router';
 
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 const app = createApp(App);
 
 app.use(router);

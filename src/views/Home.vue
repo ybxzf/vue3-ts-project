@@ -1,10 +1,10 @@
 <template>
   <div class="page">
     <div class="page-bar">
-      <LeftNavBar></LeftNavBar>
+      <left-nav-bar />
     </div>
     <div class="page-ctn">
-      <router-view></router-view>
+      <router-view />
     </div>
   </div>
 </template>

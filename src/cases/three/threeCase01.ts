@@ -49,7 +49,7 @@ light.position.set(100, 0, 0);
 scene.add(light);
 
 //创建辅助坐标轴
-const axesHelper = new THREE.AxesHelper(100, 100, 100);
+const axesHelper = new THREE.AxesHelper(100);
 //将坐标轴添加到场景
 scene.add(axesHelper);
 

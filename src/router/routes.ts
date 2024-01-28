@@ -43,6 +43,18 @@ export const routes: any = [
             cName: '鼠标+动画',
             component: () => import('@/views/threeJs/components/three03.vue')
           },
+          {
+            path: '/threeJs/three04',
+            name: 'threeJs/three04',
+            cName: '模块化',
+            component: () => import('@/views/threeJs/components/three04.vue')
+          },
+          {
+            path: '/threeJs/three05',
+            name: 'threeJs/three05',
+            cName: '案例5',
+            component: () => import('@/views/threeJs/components/three05.vue')
+          },
         ]
       },
       {

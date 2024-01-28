@@ -1,6 +1,8 @@
 <template>
     <div class="about">
-        <h1>This is an about page</h1>
+        <h1>
+            <a href="https://github.com/ybxzf/vue3-ts-project"> vue-project项目github地址</a>
+        </h1>
     </div>
 </template>
   
