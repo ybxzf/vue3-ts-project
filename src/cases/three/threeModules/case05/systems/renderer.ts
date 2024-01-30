@@ -6,9 +6,14 @@ import { WebGLRenderer } from 'three';
  */
 function createRenderer() {
     //创建渲染器
-    const renderer: any = new WebGLRenderer();
+    const renderer: any = new WebGLRenderer({
+        antialias: true, // 防锯齿
+        alpha: true,
+    });
     // turn on the physically correct lighting model 启动物理光照
     renderer.physicallyCorrectLights = true;
+    //设置渲染器像素分辨值
+    renderer.setPixelRatio(window.devicePixelRatio);
     return renderer;
 }
 
