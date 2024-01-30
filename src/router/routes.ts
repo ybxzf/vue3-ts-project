@@ -52,7 +52,7 @@ export const routes: any = [
           {
             path: '/threeJs/three05',
             name: 'threeJs/three05',
-            cName: '案例5',
+            cName: '纹理材质',
             component: () => import('@/views/threeJs/components/three05.vue')
           },
         ]
