@@ -18,13 +18,16 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 //引入router
 import router from './router';
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+//引入layui
+import Layui from '@layui/layui-vue'
+import '@layui/layui-vue/lib/index.css'
 
 const app = createApp(App);
 
 app.use(router);
 app.use(pinia);
 app.use(ElementPlus);
+app.use(Layui);
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)

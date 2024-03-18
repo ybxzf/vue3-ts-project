@@ -58,6 +58,27 @@ export const routes: any = [
         ]
       },
       {
+        path: '/layUI',
+        name: 'layUI',
+        cName: 'layUI案例',
+        redirect: "/layUI/test01",
+        // component: () => import('@/views/threeJs/index.vue'),
+        children: [
+          {
+            path: '/layUI/test01',
+            name: 'layUI/test01',
+            cName: '基本操作1',
+            component: () => import('@/views/layui/components/test01.vue')
+          },
+          {
+            path: '/layUI/test02',
+            name: 'layUI/test02',
+            cName: '基本操作2',
+            component: () => import('@/views/layui/components/test02.vue')
+          },
+        ]
+      },
+      {
         path: '/about',
         name: 'about',
         cName: '关于',

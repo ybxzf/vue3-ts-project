@@ -10,7 +10,8 @@
   ],
   "compilerOptions": {
     "types": [
-      "element-plus/global"
+      "element-plus/global",
+      "@layui/layui-vue/types/components"
     ],
     "noUnusedLocals": false,
   }
