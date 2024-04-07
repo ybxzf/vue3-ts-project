@@ -204,109 +204,7 @@ const option = ref<any>({
             }
         }
     },
-    series: [
-        {
-            data: [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-                32,
-                33,
-                34,
-                35,
-                36,
-                37,
-                38,
-                39,
-                40,
-                41,
-                42,
-                43,
-                44,
-                45,
-                46,
-                47,
-                48,
-                49,
-                50,
-                51,
-                52,
-                53,
-                54,
-                55,
-                56,
-                57,
-                58,
-                59,
-                60,
-                61,
-                62,
-                63,
-                64,
-                65,
-                66,
-                67,
-                68,
-                69,
-                70,
-                71,
-                72,
-                73,
-                74,
-                75,
-                76,
-                77,
-                78,
-                79,
-                80,
-                81,
-                82,
-                83,
-                84,
-                85,
-                86,
-                87,
-                88,
-                89,
-                90,
-                91,
-                92,
-                93,
-                94,
-                95,
-                96
-            ],
-            type: 'line'
-        }
-    ]
+    series: [],
 });
 let myChart: any = null;
 
@@ -318,9 +216,7 @@ onMounted(() => {
 });
 watch(() => curveType.value,
     async (_nv: number, _ov: number) => {
-        console.log('切换', _nv);
         if (_nv === 24) {
-            console.log('xxx')
             await setOptionSeries(24);
             option.value.xAxis.data = xAxisData24.value;
         } else {
@@ -344,7 +240,6 @@ const setOptionSeries = async (type: number) => {
     } else {
         res = await getElectricFor96();
     };
-    console.log(res)
     if (res.code === 0) {
         const zxygz: any = [];
         const fxygz: any = [];
@@ -409,7 +304,10 @@ const setOptionSeries = async (type: number) => {
         .echart-item-1 {
             width: 1000px;
             height: 500px;
-            border: 1px solid red;
+            padding: 10px 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
     }
 }
