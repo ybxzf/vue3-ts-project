@@ -1,3 +1,7 @@
+export function getDataFor24() {};
+
+export function getDataFor96() {};
+
 export function getElectricFor24() {
   return {
     msg: "操作成功",
