@@ -1,10 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import { routes } from "./routes";
 
-// const routerHistory = createWebHistory('/vue-project')
+//history模式，刷新可能无法访问
+// const routerHistory = createWebHistory('/sim-dashboard')
 const router = createRouter({
   //import.meta.env: vite.config中配置的基本信息
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // hash模式
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   // history: routerHistory,
   routes
 })
