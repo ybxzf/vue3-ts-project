@@ -27,5 +27,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    outDir: 'vue-project' // 设置打包文件夹的名称为'vue-project'
   }
 })
