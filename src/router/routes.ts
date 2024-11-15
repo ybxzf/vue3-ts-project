@@ -55,6 +55,18 @@ export const routes: any = [
             cName: '纹理材质',
             component: () => import('@/views/threeJs/components/three05.vue')
           },
+          {
+            path: '/threeJs/three06',
+            name: 'threeJs/three06',
+            cName: '导入模型',
+            component: () => import('@/views/threeJs/components/three06.vue')
+          },
+          {
+            path: '/threeJs/three07',
+            name: 'threeJs/three07',
+            cName: '模型+动画',
+            component: () => import('@/views/threeJs/components/three07.vue')
+          },
         ]
       },
       {
