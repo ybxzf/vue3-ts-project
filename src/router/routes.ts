@@ -56,9 +56,15 @@ export const routes: any = [
             component: () => import('@/views/threeJs/components/three05.vue')
           },
           {
+            path: '/threeJs/three06_1',
+            name: 'threeJs/three06_1',
+            cName: '导入模型1',
+            component: () => import('@/views/threeJs/components/three06_1.vue')
+          },
+          {
             path: '/threeJs/three06',
             name: 'threeJs/three06',
-            cName: '导入模型',
+            cName: '导入模型2',
             component: () => import('@/views/threeJs/components/three06.vue')
           },
           {
