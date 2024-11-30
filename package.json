@@ -16,6 +16,7 @@
     "@layui/layui-vue": "^2.16.5",
     "@three-ts/orbit-controls": "^1.4.7",
     "echarts": "^5.5.0",
+    "echarts-gl": "^2.0.9",
     "element-plus": "^2.5.3",
     "layui": "^2.9.7",
     "less": "^4.2.0",

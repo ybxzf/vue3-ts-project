@@ -73,6 +73,12 @@ export const routes: any = [
             cName: '模型+动画',
             component: () => import('@/views/threeJs/components/three07.vue')
           },
+          {
+            path: '/threeJs/three08',
+            name: 'threeJs/three08',
+            cName: '模型+动画',
+            component: () => import('@/views/threeJs/components/three08.vue')
+          },
         ]
       },
       {
@@ -112,6 +118,12 @@ export const routes: any = [
             name: 'echarts/test02',
             cName: '图像2',
             component: () => import('@/views/echarts/components/test02.vue')
+          },
+          {
+            path: '/echarts/test03',
+            name: 'echarts/test03',
+            cName: '图像3',
+            component: () => import('@/views/echarts/components/test03.vue')
           },
         ]
       },
