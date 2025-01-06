@@ -9,7 +9,6 @@ import * as THREE from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons';
 import { OrbitControls } from '@three-ts/orbit-controls';
 import axios from "axios";
-import CryptoJS from 'crypto-js';
 import { cryptoAES } from '@/cases/three/threeModules/case06_1/aes';
 
 const myThree = ref<HTMLDivElement | null>(null);
@@ -26,33 +25,7 @@ onMounted(async () => {
     initThree();
     // convertUrlToBlob('/matrix/threeModel/test.glb');
 })
-function blobToArrayBuffer(blob: any) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
 
-        // 监听读取成功的事件
-        reader.onload = function (event: any) {
-            resolve(event.target.result);  // 返回读取到的 ArrayBuffer
-        };
-
-        // 监听读取错误的事件
-        reader.onerror = function (event) {
-            reject(new Error("File reading error"));
-        };
-
-        // 读取 Blob 数据
-        reader.readAsArrayBuffer(blob);
-    });
-}
-// 将 Uint8Array 转换为 Base64 编码
-function arrayBufferToBase64(buffer: any) {
-    const uint8Array = new Uint8Array(buffer);
-    let binary = '';
-    uint8Array.forEach(byte => {
-        binary += String.fromCharCode(byte);
-    });
-    return window.btoa(binary);
-}
 const initThree = async () => {
     if (myThree.value) {
         scene = new THREE.Scene();

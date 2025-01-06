@@ -94,7 +94,7 @@ export const routes: any = [
           {
             path: '/threeJs/three11',
             name: 'threeJs/three11',
-            cName: 'three+AR',
+            cName: '场景（环境纹理）',
             component: () => import('@/views/threeJs/components/three11.vue')
           },
         ]

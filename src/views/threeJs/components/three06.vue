@@ -75,7 +75,9 @@ const init = async () => {
         Stork.scene.rotation.set(0, 1, 0);
         group.add(Stork.scene);
 
-        loader.load('/matrix/Parrot.glb', (gltf) => {
+        loader.load(
+        require('/matrix/Parrot.glb')
+        , (gltf) => {
             gltf.scene.position.set(0, 3, 0);
             gltf.scene.rotation.set(0, 1, 0);
             renderer.value.render(scene, camera.value);
