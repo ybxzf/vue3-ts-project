@@ -6,8 +6,11 @@
 <script setup lang="ts">
 import { defineComponent, onMounted, ref, onBeforeUnmount } from "vue";
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons';
+import { GLTFLoader, type GLTF } from 'three/addons';
 import { OrbitControls } from '@three-ts/orbit-controls';
+import axios from "axios";
+import CryptoJS from 'crypto-js';
+import { cryptoAES } from '@/cases/three/threeModules/case06_1/aes';
 
 const myThree = ref<HTMLDivElement | null>(null);
 let scene: THREE.Scene;
@@ -19,13 +22,41 @@ let group: THREE.Group;
 let raycaster: THREE.Raycaster; // 射线检测器
 let mouse: THREE.Vector2; // 鼠标坐标
 
-onMounted(() => {
+onMounted(async () => {
     initThree();
+    // convertUrlToBlob('/matrix/threeModel/test.glb');
 })
+function blobToArrayBuffer(blob: any) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
 
-const initThree = () => {
+        // 监听读取成功的事件
+        reader.onload = function (event: any) {
+            resolve(event.target.result);  // 返回读取到的 ArrayBuffer
+        };
+
+        // 监听读取错误的事件
+        reader.onerror = function (event) {
+            reject(new Error("File reading error"));
+        };
+
+        // 读取 Blob 数据
+        reader.readAsArrayBuffer(blob);
+    });
+}
+// 将 Uint8Array 转换为 Base64 编码
+function arrayBufferToBase64(buffer: any) {
+    const uint8Array = new Uint8Array(buffer);
+    let binary = '';
+    uint8Array.forEach(byte => {
+        binary += String.fromCharCode(byte);
+    });
+    return window.btoa(binary);
+}
+const initThree = async () => {
     if (myThree.value) {
         scene = new THREE.Scene();
+        scene.background = new THREE.Color('skyblue');
         camera = new THREE.PerspectiveCamera(75, myThree.value.clientWidth / myThree.value.clientHeight, 0.1, 10000);
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(myThree.value.clientWidth, myThree.value.clientHeight);
@@ -45,7 +76,41 @@ const initThree = () => {
 
     // 加载 GLB 模型
     const loader = new GLTFLoader();
-    loader.load('/matrix/threeModel/test.glb', (gltf: any) => {
+    const response: any = await axios.get('/getApi/getBlob', {
+        responseType: 'arraybuffer', // 获取二进制数据
+    });
+
+    // const response: any = await axios.get('/encrypt?filePath=tj/gltf-lpt-zp-v2.0-20221205001.glb',
+    // // const response: any = await axios.get('/encrypt?filePath=tj/test.glb',
+    //     {
+    //         responseType: 'arraybuffer', // 获取二进制数据
+    //     }
+    // );
+    console.log('response', response);
+
+    // // 获取加密数据和 IV
+    // const encryptedData: any = new Uint8Array(response.data);
+    // const ivHex = response.headers['x-iv']; // 获取响应头中的 IV
+    // // 解析 IV 为 CryptoJS 对象
+    // const iv = CryptoJS.enc.Hex.parse(ivHex);
+    // // 解密过程
+    // const secretKey = 'mysecretkey12345';  // 与后端一致的密钥
+    // // 将加密数据转换为 Base64 编码（CryptoJS 需要的格式）
+    // // const encryptedBase64 = btoa(String.fromCharCode.apply(null, encryptedData));
+    // const encryptedBase64 = arrayBufferToBase64(encryptedData.buffer);
+    // // 使用 AES 解密
+    // const decryptedData = CryptoJS.AES.decrypt(encryptedBase64, CryptoJS.enc.Utf8.parse(secretKey), { iv: iv });
+    // // 将解密后的数据转换成 Uint8Array
+    // const decryptedArray = new Uint8Array(decryptedData.sigBytes); // 获取解密结果的字节数
+    // for (let i = 0; i < decryptedData.sigBytes; i++) {
+    //     decryptedArray[i] = decryptedData.words[i >>> 2] >>> ((3 - (i % 4)) * 8) & 0xff;
+    // }
+    // // 转换为 ArrayBuffer
+    // const decryptedBuffer = decryptedArray.buffer;
+    const decryptedBuffer = cryptoAES(response);
+    loader.parse(decryptedBuffer, '', (gltf: GLTF) => {
+        console.log('gltf:', gltf);
+
         const model = gltf.scene;
         // model.position.set(40, -20, -100); // 设置模型加载坐标
         model.position.set(0, 0, 0); // 设置模型加载坐标
@@ -87,12 +152,7 @@ const initThree = () => {
         scene.add(group);
 
         animate();
-    },
-        undefined,
-        (error: any) => {
-            console.error(error);
-        }
-    );
+    });
     camera.position.z = 5;
     //创建控件对象
     const controls: any = new OrbitControls(camera, renderer.domElement);

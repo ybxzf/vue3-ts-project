@@ -29,7 +29,7 @@ class ThreeCase {
         //将渲染器作为DOM元素添加到参数container的DOM中
         container.append(renderer.domElement);
         //创建方块的网格模型
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 1; i++) {
             const cube: any = createCubeMash(i * 3, 0, 0);
             scene.add(cube);
             cubes.push(cube);
@@ -41,7 +41,7 @@ class ThreeCase {
         const axesHelper: any = new AxesHelper(5);
 
         //添加到场景中
-        scene.add(light, axesHelper);
+        scene.add(light);
         //创建渲染更新类的对象
         const resizer: any = new Resizer(container, camera, renderer);
 
@@ -69,9 +69,9 @@ function animate() {
     //递归调用动画
     window.requestAnimationFrame(animate);
     //每次刷新旋转(rotation)角度0.01
-    for (let i = 0; i < cubes.length; i++) {
-        cubes[i].rotation.y += 0.01;
-    }
+    // for (let i = 0; i < cubes.length; i++) {
+    //     cubes[i].rotation.y += 0.01;
+    // }
     // cube.rotation.x += 0.01;
 
     //重新渲染场景和相机

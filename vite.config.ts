@@ -14,7 +14,14 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 1111,
     proxy: {
-      '/api': 'http://47.108.165.207:20088/ ',
+      "/getApi": {
+        target: "http://localhost:3000/",
+        timeout: 20 * 60 * 1000,
+        changeOrigin: true,
+      },
+      '/getCryptoMatrixBlob': 'http://172.168.18.59:8081/',
+      '/encrypt': 'http://172.168.18.59:8081/',
+      '/downloadMatrix': 'http://172.168.18.59:8081/',
       "/alm_framework": {
         target: "http://47.108.165.207:20088/api",
         timeout: 20 * 60 * 1000,

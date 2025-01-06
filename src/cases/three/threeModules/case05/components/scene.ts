@@ -8,7 +8,7 @@ function createScene() {
   //创建场景Scene
   const scene: any = new Scene();
   //设置场景背景色
-  scene.background = new Color('skyblue');
+  scene.background = new Color('grey');
   return scene;
 }
 

@@ -58,7 +58,7 @@ export const routes: any = [
           {
             path: '/threeJs/three06_1',
             name: 'threeJs/three06_1',
-            cName: '导入模型1',
+            cName: '导入加密模型',
             component: () => import('@/views/threeJs/components/three06_1.vue')
           },
           {
@@ -70,14 +70,32 @@ export const routes: any = [
           {
             path: '/threeJs/three07',
             name: 'threeJs/three07',
-            cName: '模型+动画',
+            cName: '模型+预设动画',
             component: () => import('@/views/threeJs/components/three07.vue')
           },
           {
             path: '/threeJs/three08',
             name: 'threeJs/three08',
-            cName: '模型+动画',
+            cName: '3D饼图',
             component: () => import('@/views/threeJs/components/three08.vue')
+          },
+          {
+            path: '/threeJs/three09',
+            name: 'threeJs/three09',
+            cName: 'three+tween动画',
+            component: () => import('@/views/threeJs/components/three09.vue')
+          },
+          {
+            path: '/threeJs/three10',
+            name: 'threeJs/three10',
+            cName: 'three+AR',
+            component: () => import('@/views/threeJs/components/three10.vue')
+          },
+          {
+            path: '/threeJs/three11',
+            name: 'threeJs/three11',
+            cName: 'three+AR',
+            component: () => import('@/views/threeJs/components/three11.vue')
           },
         ]
       },
