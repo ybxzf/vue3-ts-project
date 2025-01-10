@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons';
 import { OrbitControls } from '@three-ts/orbit-controls';
 import axios from "axios";
-import { cryptoAES } from '@/cases/three/threeModules/case06_1/aes';
+import { cryptoAES, decryptBase64, base64ToArrayBuffer } from '@/cases/three/threeModules/case06_1/aes';
 
 const myThree = ref<HTMLDivElement | null>(null);
 let scene: THREE.Scene;
@@ -49,16 +49,16 @@ const initThree = async () => {
 
     // 加载 GLB 模型
     const loader = new GLTFLoader();
-    const response: any = await axios.get('/getApi/getBlob', {
-        responseType: 'arraybuffer', // 获取二进制数据
-    });
+    // const response: any = await axios.get('/getApi/getBlob', {
+    //     responseType: 'arraybuffer', // 获取二进制数据
+    // });
 
-    // const response: any = await axios.get('/encrypt?filePath=tj/gltf-lpt-zp-v2.0-20221205001.glb',
-    // // const response: any = await axios.get('/encrypt?filePath=tj/test.glb',
-    //     {
-    //         responseType: 'arraybuffer', // 获取二进制数据
-    //     }
-    // );
+    const response: any = await axios.get('/matrix/tdds-sh-nx3.glb',
+    // const response: any = await axios.get('/encrypt?filePath=tdds-sh-nx.glb',
+        {
+            responseType: 'arraybuffer', // 获取二进制数据
+        }
+    );
     console.log('response', response);
 
     // // 获取加密数据和 IV
@@ -81,6 +81,10 @@ const initThree = async () => {
     // // 转换为 ArrayBuffer
     // const decryptedBuffer = decryptedArray.buffer;
     const decryptedBuffer = cryptoAES(response);
+    const response1: any = await axios.get('/encrypt1?filePath=tj/test.glb')
+    const decryptedBase64 = decryptBase64(response1);
+    const binaryData = base64ToArrayBuffer(decryptedBase64);
+
     loader.parse(decryptedBuffer, '', (gltf: GLTF) => {
         console.log('gltf:', gltf);
 

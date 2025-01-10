@@ -21,6 +21,7 @@ export default defineConfig({
       },
       '/getCryptoMatrixBlob': 'http://172.168.18.59:8081/',
       '/encrypt': 'http://172.168.18.59:8081/',
+      '/encrypt1': 'http://172.168.18.59:8081/',
       '/downloadMatrix': 'http://172.168.18.59:8081/',
       "/alm_framework": {
         target: "http://47.108.165.207:20088/api",
