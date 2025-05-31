@@ -146,11 +146,51 @@ export const routes: any = [
         ]
       },
       {
+        path: '/drag',
+        name: 'drag',
+        cName: 'drag案例',
+        redirect: "/drag/test01",
+        children: [
+          {
+            path: '/drag/test01',
+            name: 'drag/test01',
+            cName: '简单拖拽',
+            component: () => import('@/views/drag/components/test01.vue')
+          },
+          {
+            path: '/drag/test02',
+            name: 'drag/test02',
+            cName: '多个拖拽',
+            component: () => import('@/views/drag/components/test02.vue')
+          },
+        ]
+      },
+      {
+        path: '/translate',
+        name: 'translate',
+        cName: '翻译案例',
+        redirect: "/translate/test01",
+        children: [
+          {
+            path: '/translate/test01',
+            name: 'translate/test01',
+            cName: '百度翻译',
+            component: () => import('@/views/translate/components/test01.vue')
+          },
+        ]
+      },
+      {
         path: '/about',
         name: 'about',
         cName: '关于',
         component: () => import('@/views/about/index.vue')
       },
     ]
-  }
+  },
+  {
+    path: '/bigScreen',
+    name: 'bigScreen',
+    cName: '大屏',
+    component: () => import('@/views/bigScreen/index.vue')
+  },
 ];

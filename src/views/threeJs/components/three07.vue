@@ -11,14 +11,18 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, reactive } from "vue";
-import { GridHelper, AnimationMixer, Raycaster, WebGLRenderer, AxesHelper, Group, Color, Scene, DirectionalLight, HemisphereLight, Clock, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
+import { GridHelper, AnimationMixer, Vector2, Raycaster, WebGLRenderer, AxesHelper, Group, Color, Scene, DirectionalLight, HemisphereLight, Clock, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
 
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass.js";
 import { OrbitControls } from '@three-ts/orbit-controls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 let scene: any = null;
 let group: any = null;
 let controls: any = null;
+let composer: any = null;
 // 用于控制动画的变量
 let mixerList: any[] = [];
 
@@ -73,7 +77,7 @@ const init = async () => {
 
         renderer.value = new WebGLRenderer();
         renderer.value.setSize(1000, 800);
-        renderer.value.render(scene, camera.value);
+        // renderer.value.render(scene, camera.value);
 
         group = new Group();
         group.name = "鸟群";
@@ -129,7 +133,7 @@ const init = async () => {
         //控制器注意力
         controls.target.copy(group.children[0].position);
         controls.addEventListener("change", () => {
-            renderer.value.render(scene, camera.value);
+            // renderer.value.render(scene, camera.value);
         });
         // 添加预设动画
         birds.forEach((gltf: any, i: number) => {
@@ -147,7 +151,8 @@ const init = async () => {
                 }
             }
         })
-        animate()
+        highLightPoss();
+        animate();
     }
 }
 
@@ -157,8 +162,53 @@ function initGridHelper() {
     scene.add(gridHelper)
 }
 
+/**
+ * 模型指定名称部位高亮闪烁
+ * 关键点：
+ *  1.使用EffectComposer代替renderer进行模型渲染
+ *  2.添加RenderPass渲染通道
+ *  3.创建轮廓高亮OutlinePass，并进行相关配置，将需要高亮的部位放入outlinePass.selectedObjects数组
+ * 注意：
+ *  1.有些版本不能高亮展示mesh，可以将mesh包装成group即可正常高亮展示
+ *  2.高亮展示必须在动画animate执行之前
+ */
+function highLightPoss(meshName = "HandR_1") {
+    composer = new EffectComposer(renderer.value);
+    const renderPass = new RenderPass(scene, camera.value);
+    composer.addPass(renderPass);
+    const outlinePass = new OutlinePass(
+        new Vector2(1000, 800),
+        scene,
+        camera.value
+    );
+    outlinePass.edgeStrength = 10.0; // 边缘强度
+    outlinePass.edgeGlow = 1.0;     // 发光强度
+    outlinePass.edgeThickness = 1.0; // 边缘厚度
+    outlinePass.pulsePeriod = 2;    // 闪烁周期（秒）
+    outlinePass.visibleEdgeColor.set(0x00ff00); // 高亮颜色
+    composer.addPass(outlinePass);
+    scene.traverse((child: any) => {
+        console.log('child', child.name, child.isMesh, child);
+        if (child.name === meshName) {
+            if (child.isMesh) {
+                const wrapper = new Group();
+                child.parent.add(wrapper);
+                wrapper.add(child);
+                // 标记原始mesh以便后续操作
+                child.userData.isOriginal = true;
+                outlinePass.selectedObjects = [child];
+            } else {
+                outlinePass.selectedObjects = [child];
+            }
+
+        }
+    });
+    // outlinePass.selectedObjects = [scene.getObjectByName(meshName)];
+}
+
 // 封装动画
 function animate() {
+    if (!composer) return; // 防御性编程
     //递归调用动画
     window.requestAnimationFrame(animate);
     //每次刷新旋转(rotation)角度0.01
@@ -175,13 +225,15 @@ function animate() {
             mixer.update(0.01); // 每帧更新动画
         }
     })
+    composer.render();
     //重新渲染场景和相机
-    renderer.value.render(scene, camera.value);
+    // renderer.value.render(scene, camera.value);
 }
 
 function showThree() {
     if (show.value) {
-        renderer.value.render(scene, camera.value);
+        composer.render();
+        // renderer.value.render(scene, camera.value);
         show.value = false;
     }
 }

@@ -16,6 +16,12 @@ threeJs最基本的3个属性：场景(scene), 相机(camera), 渲染器(rendere
 */
 import * as THREE from "three";
 import { OrbitControls } from '@three-ts/orbit-controls';
+// 效果制作器
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+// 渲染通道
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+// 发光描边OutlinePass
+import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass.js";
 
 //创建场景
 const scene: any = new THREE.Scene();
@@ -31,14 +37,15 @@ camera.lookAt(0, 0, 0);
 const geometry: any = new THREE.BoxGeometry(50, 50, 50);
 //创建材质
 const material: any = new THREE.MeshBasicMaterial({
-    color: 0x00ff00, //(绿色)
-    transparent: true, //开启透明度
+    color: 0xafaf00, //(绿色)
+    // transparent: true, //开启透明度
     opacity: 0.6, //设置透明度
 });
 //创建网格模型（形状, 材质）
 const cube: any = new THREE.Mesh(geometry, material);
 //设置模型对象的xyz坐标
 cube.position.set(0, 0, 0);
+cube.name="test";
 //将网格模型添加到场景
 
 //点光源，color:灯光颜色，intensity:光照强度
@@ -58,28 +65,49 @@ const renderer: any = new THREE.WebGLRenderer();
 //设置渲染器大小，即在页面中占画布的大小
 // renderer.setSize(1000, 800); // 转移到组件中设置了
 //渲染场景和相机
-renderer.render(scene, camera);
+// renderer.render(scene, camera);
 
 //创建控件对象
 const controls: any = new OrbitControls(camera, renderer.domElement);
 //监听鼠标，键盘事件
 controls.addEventListener("change", () => {
-    renderer.render(scene, camera);
+    // renderer.render(scene, camera);
 });
+
+const composer = new EffectComposer(renderer);
+    
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+const outlinePass = new OutlinePass(
+  new THREE.Vector2(1000,800),
+  scene,
+  camera
+);
+outlinePass.edgeStrength = 10.0; // 边缘强度
+outlinePass.edgeGlow = 1.0;     // 发光强度
+outlinePass.edgeThickness = 1.0; // 边缘厚度
+outlinePass.pulsePeriod = 2;    // 闪烁周期（秒）
+outlinePass.visibleEdgeColor.set(0x00ff00); // 高亮颜色
+composer.addPass(outlinePass);
+outlinePass.selectedObjects = [scene.getObjectByName("test")];
 
 //调用动画
 animate();
 
 // 封装动画
 function animate() {
-    //递归调用动画
-    window.requestAnimationFrame(animate);
-    //每次刷新旋转(rotation)角度0.01
-    cube.rotation.y += 0.01;
-    // cube.rotation.x += 0.01;
+  if (!composer) return; // 防御性编程
 
-    //重新渲染场景和相机
-    renderer.render(scene, camera);
+  //递归调用动画
+  window.requestAnimationFrame(animate);
+  //每次刷新旋转(rotation)角度0.01
+  cube.rotation.y += 0.01;
+  // cube.rotation.x += 0.01;
+  controls?.update();
+  composer.render();
+  //重新渲染场景和相机
+  // renderer.render(scene, camera);
 }
 
 export const render: any = renderer

@@ -23,6 +23,10 @@ export default defineConfig({
       '/encrypt': 'http://172.168.18.59:8081/',
       '/encrypt1': 'http://172.168.18.59:8081/',
       '/downloadMatrix': 'http://172.168.18.59:8081/',
+      '/translate': {
+        target: 'https://fanyi-api.baidu.com/api/trans/vip/translate',
+        changeOrigin: true, // 是否改变源地址
+      },
       "/alm_framework": {
         target: "http://47.108.165.207:20088/api",
         timeout: 20 * 60 * 1000,

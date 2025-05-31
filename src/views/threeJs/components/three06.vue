@@ -76,14 +76,14 @@ const init = async () => {
         group.add(Stork.scene);
 
         loader.load(
-        require('/matrix/Parrot.glb')
-        , (gltf) => {
-            gltf.scene.position.set(0, 3, 0);
-            gltf.scene.rotation.set(0, 1, 0);
-            renderer.value.render(scene, camera.value);
-            gltf.scene.name = "鹦鹉"
-            group.add(gltf.scene);
-        })
+            '/matrix/Parrot.glb'
+            , (gltf) => {
+                gltf.scene.position.set(0, 3, 0);
+                gltf.scene.rotation.set(0, 1, 0);
+                renderer.value.render(scene, camera.value);
+                gltf.scene.name = "鹦鹉"
+                group.add(gltf.scene);
+            })
 
         const [flamingo1, flamingo2] = await Promise.all([
             loader.loadAsync('/matrix/Flamingo.glb'),
