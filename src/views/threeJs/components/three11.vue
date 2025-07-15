@@ -11,6 +11,7 @@
 import { ref, onMounted, reactive } from "vue";
 import { BackSide, SphereGeometry, EquirectangularReflectionMapping, CubeTextureLoader, TextureLoader, GridHelper, AnimationMixer, Raycaster, WebGLRenderer, AxesHelper, Group, Color, Scene, DirectionalLight, HemisphereLight, Clock, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
 import { OrbitControls } from '@three-ts/orbit-controls';
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import Stats from 'three/addons/libs/stats.module.js';
 
 // import '@google/model-viewer'   //引入组件
@@ -40,8 +41,8 @@ const init = async () => {
         initRenderer();
         initControls();
         initStats();
-        // await initEnvTexture();
-        await initMesh('/matrix/threeModel/equirectangularMap/home.png');
+        await initEnvTexture();
+        // await initMesh('/matrix/threeModel/equirectangularMap/home.png');
         animate();
     }
 }
@@ -113,8 +114,11 @@ async function initEnvTexture() {
     // scene.background = skyBoxTexture;
 
     //2. 球形贴图(Equirectangular Map)
-    const loader = new TextureLoader();
-    const equirectangularMapTexture = await loader.loadAsync('/matrix/threeModel/equirectangularMap/home.png');
+    // const loader = new TextureLoader();
+    // const equirectangularMapTexture = await loader.loadAsync('/matrix/threeModel/equirectangularMap/home.png');
+    const rgbeLoader = new RGBELoader();
+    const equirectangularMapTexture = await rgbeLoader.loadAsync('/matrix/threeModel/equirectangularMap/yulin_model.hdr');
+    
     equirectangularMapTexture.mapping = EquirectangularReflectionMapping;
     scene.background = equirectangularMapTexture;
     scene.environment = equirectangularMapTexture;
